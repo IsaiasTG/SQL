@@ -1,0 +1,39 @@
+--Create a sneaker store database
+
+
+CREATE TABLE Sneakers (
+  id INTEGER,
+  model TEXT,
+  color TEXT,
+  brand TEXT,
+  size NUMERIC,
+  price NUMERIC
+);
+
+INSERT INTO Sneakers (id, brand, model, color, size, price) VALUES
+(1, 'Nike', 'Air Max 90', 'White/Black', 9.5, 129.99),
+(2, 'Adidas', 'Stan Smith', 'White/Green', 8, 79.99),
+(3, 'Jordan', 'Air Jordan 1', 'Black/Red', 10, 159.99),
+(4, 'Puma', 'Suede Classic', 'Blue/White', 9, 69.99),
+(5, 'New Balance', '574', 'Grey/Red', 10.5, 89.99),
+(6, 'Vans', 'Old Skool', 'Black/White', 8.5, 59.99),
+(7, 'Reebok', 'Club C 85', 'White/Navy', 11, 79.99),
+(8, 'Converse', 'Chuck Taylor All Star', 'Black', 9, 54.99),
+(9, 'Under Armour', 'Curry 7', 'Grey/Yellow', 10, 129.99),
+(10, 'ASICS', 'Gel-Lyte III', 'Black/Green', 9.5, 119.99),
+(11, 'Puma', 'Clyde Court', 'Red/Black', 10.5, 129.99),
+(12, 'Nike', 'Air Force 1', 'White', 9, 99.99),
+(13, 'Adidas', 'Ultraboost', 'Black/White', 10, 179.99),
+(14, 'Jordan', 'Air Jordan 4', 'Black/Cement', 11, 199.99),
+(15, 'New Balance', '990v5', 'Grey', 10.5, 174.99);
+SELECT * FROM Sneakers;
+
+--display the database ordered by price. 
+SELECT * FROM Sneakers
+ORDER BY price desc; 
+
+--what is the avg price of Nike shoes? 
+SELECT AVG(price) "avg nike shoe price"
+FROM Sneakers
+where brand='Nike'; 
+
