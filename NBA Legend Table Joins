@@ -1,0 +1,93 @@
+-- Creating four different tables of 10 of the greatest NBA players of all time and then joining them at the end.
+
+-- 1. The player's name
+-- 2. The teams that they were drafted by.
+-- 3. How many championships they have won.
+-- 4. How many League MVP Awards they've won.
+
+CREATE TABLE NBAPlayers (
+  PlayerID INTEGER PRIMARY KEY,
+  PlayerName TEXT
+);
+
+INSERT INTO NBAPlayers (PlayerID, PlayerName)
+VALUES
+  (1, 'LeBron James'),
+  (2, 'Michael Jordan'),
+  (3, 'Kobe Bryant'),
+  (4, 'Shaquille O''Neal'),
+  (5, 'Larry Bird'),
+  (6, 'Magic Johnson'),
+  (7, 'Tim Duncan'),
+  (8, 'Kareem Abdul-Jabbar'),
+  (9, 'Wilt Chamberlain'),
+  (10, 'Bill Russell');
+SELECT * FROM NBAPlayers;
+
+CREATE TABLE NBATeams (
+  TeamID INTEGER PRIMARY KEY,
+  TeamName TEXT
+);
+
+INSERT INTO NBATeams (TeamID, TeamName)
+VALUES
+  (1, 'Cleveland Cavaliers'),
+  (2, 'Chicago Bulls'),
+  (3, 'Los Angeles Lakers'),
+  (4, 'Orlando Magic'),
+  (5, 'Boston Celtics'),
+  (6, 'Los Angeles Lakers'),
+  (7, 'San Antonio Spurs'),
+  (8, 'Milwaukee Bucks'),
+  (9, 'Philadelphia Warriors'),
+  (10,'Boston Celtics');
+  
+ CREATE TABLE NBAChampionships (
+  PlayerID INTEGER,
+  TeamID INTEGER,
+  Championships INTEGER,
+  PRIMARY KEY (PlayerID, TeamID),
+  FOREIGN KEY (PlayerID) REFERENCES NBAPlayers(PlayerID),
+  FOREIGN KEY (TeamID) REFERENCES NBATeams(TeamID)
+);
+
+INSERT INTO NBAChampionships (PlayerID, TeamID, Championships)
+VALUES
+  (1, 1, 4),
+  (2, 2, 6),
+  (3, 3, 5),
+  (4, 4, 4),
+  (5, 5, 3),
+  (6, 3, 5),
+  (7, 6, 5),
+  (8, 3, 6),
+  (9, 7, 2),
+  (10, 5, 11);
+  
+  CREATE TABLE NBAMVPAwards (
+  PlayerID INTEGER,
+  MVPAwards INTEGER,
+  PRIMARY KEY (PlayerID),
+  FOREIGN KEY (PlayerID) REFERENCES NBAPlayers(PlayerID)
+);
+
+INSERT INTO NBAMVPAwards (PlayerID, MVPAwards)
+VALUES
+  (1, 4),
+  (2, 5),
+  (3, 1),
+  (4, 1),
+  (5, 3),
+  (6, 3),
+  (7, 2),
+  (8, 6),
+  (9, 4),
+  (10, 5);
+
+-- Joining the relevant data from all four of the tables.
+SELECT NBAPlayers.PlayerName, NBATeams.TeamName, NBAChampionships.Championships, NBAMVPAwards.MVPAwards
+FROM NBAPlayers
+JOIN NBAChampionships ON NBAPlayers.PlayerID = NBAChampionships.PlayerID
+JOIN NBATeams ON NBAChampionships.TeamID = NBATeams.TeamID
+JOIN NBAMVPAwards ON NBAPlayers.PlayerID = NBAMVPAwards.PlayerID;
+
