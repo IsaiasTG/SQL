@@ -115,3 +115,15 @@ GROUP BY Team
 ORDER BY AppearanceCount DESC
 LIMIT 1;
 
+-- Display all of the teams that have won 3 or more Super Bowls.
+SELECT Winner, COUNT(*) AS Wins
+FROM superbowls
+GROUP BY Winner
+HAVING COUNT(*) >= 3;
+
+-- Display the Super Bowls where either the Patriots or Steelers defeated the Seahawks or Cardinals.
+SELECT *
+FROM superbowls
+WHERE (Winner = 'New England Patriots' OR Winner = 'Pittsburgh Steelers')
+  AND (Loser = 'Seattle Seahawks' OR Loser = 'Arizona Cardinals');
+
